@@ -1,14 +1,11 @@
 <template>
   <h1>App Root</h1>
+  <h1>test svg</h1>
+  <!--test svg-->
+  <svg-icon name="home" color="pink" width="100px" height="100px"></svg-icon>
+  <Pagination></Pagination>
 </template>
 
-<script>
-export default {
-  name: 'App',
-}
-for (let i = 0; i < 9; i++) {
-  console.log(i)
-}
-</script>
+<script setup lang="ts"></script>
 
 <style scoped></style>

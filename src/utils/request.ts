@@ -5,11 +5,11 @@ const request = axios.create({
   baseURL: import.meta.env.VITE_APP_BASE_API,
   timeout: 5000,
 })
-//request拦截器
+//request interceptors
 request.interceptors.request.use((config) => {
   return config
 })
-//response拦截器
+//response interceptors
 request.interceptors.response.use(
   (response) => {
     return response.data

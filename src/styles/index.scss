@@ -1,2 +1,14 @@
 //import reset styles
 @import "reset";
+
+//scroll style
+::-webkit-scrollbar{
+  width: 15px;
+}
+::-webkit-scrollbar-track{
+  background: $base-menu-background;
+}
+::-webkit-scrollbar-thumb{
+  width: 15px;
+  background: lightgrey;
+}

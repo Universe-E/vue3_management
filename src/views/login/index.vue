@@ -69,7 +69,7 @@ let loading = ref(false)
 let loginForm = reactive({ username: 'admin', password: '111111' })
 //login button function
 const login = async () => {
-  //保证全部表单相校验通过再发请求
+  //ensure all forms are validated before sending request
   await loginForms.value.validate()
   //loading parameter
   loading.value = true
@@ -106,18 +106,18 @@ const login = async () => {
 //value: text content of form
 //callback: send message if invalid
 const validatorUserName = (rule: any, value: any, callback: any) => {
-  if (value.length >= 5) {
+  if (value.length >= 5 && value.length <= 10) {
     callback()
   } else {
-    callback(new Error('username length must be >= 5 !'))
+    callback(new Error('username length must be in range 6-10 !'))
   }
 }
 
 const validatorPassword = (rule: any, value: any, callback: any) => {
-  if (value.length >= 6) {
+  if (value.length >= 6 && value.length <= 10) {
     callback()
   } else {
-    callback(new Error('password length must be >= 6 !'))
+    callback(new Error('password length must be in range 6-15 !'))
   }
 }
 
@@ -132,7 +132,7 @@ const rules = {
   username: [
     {
       required: true,
-      min: 6,
+      min: 5,
       max: 10,
       message: 'username length must be in range 6-10',
       trigger: 'change',

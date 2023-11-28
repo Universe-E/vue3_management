@@ -15,6 +15,11 @@
 import Breadcrumb from './breadcrumb/index.vue'
 import Setting from './setting/index.vue'
 </script>
+<script lang="ts">
+export default {
+  name: 'Tabbar',
+}
+</script>
 
 <style scoped lang="scss">
 .tabbar {
@@ -22,7 +27,7 @@ import Setting from './setting/index.vue'
   height: 100%;
   display: flex;
   justify-content: space-between;
-  background-image: linear-gradient(to right, white, #dcfc82);
+  background-image: linear-gradient(to right, white, #dcfc82, white);
   .tabbar_left {
     display: flex;
     align-items: center;

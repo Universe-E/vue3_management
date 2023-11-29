@@ -5,6 +5,7 @@ const useLayoutSettingStore = defineStore('SettingStore', {
   state: () => {
     return {
       fold: false, //control the folding property of menu
+      refresh: false, //control refresh
     }
   },
 })

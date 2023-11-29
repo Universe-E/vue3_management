@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
+import useUserStore from '@/store/modules/user'
 //create axios instances
 const request = axios.create({
   baseURL: import.meta.env.VITE_APP_BASE_API,
@@ -7,6 +8,12 @@ const request = axios.create({
 })
 //request interceptors
 request.interceptors.request.use((config) => {
+  //get user info repository, bring token to server after successfully login
+  const userStore = useUserStore()
+  console.log(userStore.token)
+  if (userStore.token) {
+    config.headers.token = userStore.token
+  }
   return config
 })
 //response interceptors

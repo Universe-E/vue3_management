@@ -14,7 +14,7 @@
   <el-button size="small" icon="Setting" circle></el-button>
   <!--user avatar-->
   <img
-    src="public/logo.png"
+    :src="userStore.avatar"
     style="height: 24px; width: 24px; margin-left: 20px"
   />
   <!--dropdown menu-->
@@ -35,7 +35,9 @@
 
 <script setup lang="ts">
 import useLayoutSettingStore from '@/store/modules/setting.ts'
+import useUserStore from '@/store/modules/user.ts'
 
+let userStore = useUserStore()
 let layoutSettingStore = useLayoutSettingStore()
 //change status when clicking refresh button
 const updateRefresh = () => {

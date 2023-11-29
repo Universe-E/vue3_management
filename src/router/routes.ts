@@ -42,6 +42,18 @@ export const constRoute = [
       icon: 'Platform',
     },
   },
+
+  {
+    path: '/404',
+    component: () => import('@/views/404/index.vue'),
+    meta: {
+      title: 'Not Found',
+      hidden: true,
+      icon: 'DocumentDelete',
+    },
+  },
+]
+export const asyncRoute = [
   {
     path: '/acl',
     component: () => import('@/layout/index.vue'),
@@ -51,7 +63,6 @@ export const constRoute = [
       title: 'Authenticator',
       icon: 'Lock',
     },
-
     children: [
       {
         path: '/acl/user',
@@ -131,23 +142,14 @@ export const constRoute = [
       },
     ],
   },
-  {
-    path: '/404',
-    component: () => import('@/views/404/index.vue'),
-    meta: {
-      title: 'Not Found',
-      hidden: true,
-      icon: 'DocumentDelete',
-    },
-  },
-  {
-    path: '/:pathMatch(.*)*',
-    redirect: '/404',
-    name: 'any',
-    meta: {
-      title: 'Any',
-      hidden: true,
-      icon: 'DataLine',
-    },
-  },
 ]
+export const anyRoute = {
+  path: '/:pathMatch(.*)*',
+  redirect: '/404',
+  name: 'Any',
+  meta: {
+    title: 'Any',
+    hidden: true,
+    icon: 'DataLine',
+  },
+}

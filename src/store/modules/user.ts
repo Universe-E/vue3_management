@@ -1,23 +1,25 @@
-//create user store
+//创建用户相关的小仓库
 import { defineStore } from 'pinia'
-//import interface
-import { reqLogin, reqLogout, reqUserInfo } from '@/api/user'
+//引入接口
+import { reqLogin, reqUserInfo, reqLogout } from '@/api/user'
 import type {
   loginFormData,
   loginResponseData,
   userInfoReponseData,
 } from '@/api/user/type'
 import type { UserState } from './types/type'
-//import token management
+//引入操作本地存储的工具方法
 import { SET_TOKEN, GET_TOKEN, REMOVE_TOKEN } from '@/utils/token'
-//import route
-import { constRoute, asyncRoute, anyRoute } from '@/router/routes'
+//引入路由(常量路由)
+import { constantRoute, asnycRoute, anyRoute } from '@/router/routes'
 
+//引入深拷贝方法
+//@ts-expect-error
 import cloneDeep from 'lodash/cloneDeep'
 import router from '@/router'
 //用于过滤当前用户需要展示的异步路由
-function filterAsyncRoute(asyncRoute: any, routes: any) {
-  return asyncRoute.filter((item: any) => {
+function filterAsyncRoute(asnycRoute: any, routes: any) {
+  return asnycRoute.filter((item: any) => {
     if (routes.includes(item.name)) {
       if (item.children && item.children.length > 0) {
         //硅谷333账号:product\trademark\attr\sku
@@ -28,57 +30,56 @@ function filterAsyncRoute(asyncRoute: any, routes: any) {
   })
 }
 
-//create user store
+//创建用户小仓库
 const useUserStore = defineStore('User', {
-  //store data
+  //小仓库存储数据地方
   state: (): UserState => {
     return {
-      token: GET_TOKEN(), //unique token
-      menuRoutes: constRoute, //store menu routes needs array
+      token: GET_TOKEN(), //用户唯一标识token
+      menuRoutes: constantRoute, //仓库存储生成菜单需要数组(路由)
       username: '',
       avatar: '',
-      //current user whether contains buttons
+      //存储当前用户是否包含某一个按钮
       buttons: [],
     }
   },
-  //async logics
+  //异步|逻辑的地方
   actions: {
-    //user login method
+    //用户登录的方法
     async userLogin(data: loginFormData) {
-      //login request
+      //登录请求
       const result: loginResponseData = await reqLogin(data)
-      //login request: success 200 -> token
-      //login request: fail 201 -> fail message
+      //登录请求:成功200->token
+      //登录请求:失败201->登录失败错误的信息
       if (result.code == 200) {
-        //pinia store token
+        //pinia仓库存储一下token
         //由于pinia|vuex存储数据其实利用js对象
         this.token = result.data as string
-        //local storage
+        //本地存储持久化存储一份
         SET_TOKEN(result.data as string)
-        //return a success promise
+        //能保证当前async函数返回一个成功的promise
         return 'ok'
       } else {
-        //login failed. return error message
         return Promise.reject(new Error(result.data))
       }
     },
-    //get user info
+    //获取用户信息方法
     async userInfo() {
-      //store user info in repository (name, avatar etc.)
+      //获取用户信息进行存储仓库当中[用户头像、名字]
       const result: userInfoReponseData = await reqUserInfo()
       console.log(result)
-      //if successful store user info
+      //如果获取用户信息成功，存储一下用户信息
       if (result.code == 200) {
         this.username = result.data.name
         this.avatar = result.data.avatar
         this.buttons = result.data.buttons
         //计算当前用户需要展示的异步路由
         const userAsyncRoute = filterAsyncRoute(
-          cloneDeep(asyncRoute),
+          cloneDeep(asnycRoute),
           result.data.routes,
         )
         //菜单需要的数据整理完毕
-        this.menuRoutes = [...constRoute, ...userAsyncRoute, anyRoute]
+        this.menuRoutes = [...constantRoute, ...userAsyncRoute, anyRoute]
         //目前路由器管理的只有常量路由:用户计算完毕异步路由、任意路由动态追加
         ;[...userAsyncRoute, anyRoute].forEach((route: any) => {
           router.addRoute(route)
@@ -106,4 +107,5 @@ const useUserStore = defineStore('User', {
   },
   getters: {},
 })
+//对外暴露获取小仓库方法
 export default useUserStore

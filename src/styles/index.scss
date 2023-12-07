@@ -1,14 +1,17 @@
-//import reset styles
-@import "reset";
+//引入清除默认样式
+@import './reset.scss';
 
-//scroll style
-::-webkit-scrollbar{
-  width: 15px;
+//滚动条外观设置
+::-webkit-scrollbar {
+    width: 10px;
 }
-::-webkit-scrollbar-track{
-  background: $base-menu-background;
+
+::-webkit-scrollbar-track {
+    background: $base-menu-background;
 }
+
 ::-webkit-scrollbar-thumb{
-  width: 15px;
-  background: lightgrey;
+    width: 10px;
+    background-color: yellowgreen;
+    border-radius: 10px;
 }

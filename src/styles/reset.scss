@@ -1,15 +1,9 @@
-/**
- * ENGINE
- * v0.2 | 20150615
- * License: none (public domain)
- */
-
 *,
 *:after,
 *:before {
-  box-sizing: border-box;
+    box-sizing: border-box;
 
-  outline: none;
+    outline: none;
 }
 
 html,
@@ -93,15 +87,15 @@ time,
 mark,
 audio,
 video {
-  font: inherit;
-  font-size: 100%;
+    font: inherit;
+    font-size: 100%;
 
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 
-  vertical-align: baseline;
+    vertical-align: baseline;
 
-  border: 0;
+    border: 0;
 }
 
 article,
@@ -115,74 +109,78 @@ hgroup,
 menu,
 nav,
 section {
-  display: block;
+    display: block;
 }
 
 body {
-  line-height: 1;
+    line-height: 1;
 }
 
 ol,
 ul {
-  list-style: none;
+    list-style: none;
 }
 
 blockquote,
 q {
-  quotes: none;
-  &:before,
-  &:after {
-    content: '';
-    content: none;
-  }
+    quotes: none;
+
+    &:before,
+    &:after {
+        content: '';
+        content: none;
+    }
 }
 
 sub,
 sup {
-  font-size: 75%;
-  line-height: 0;
+    font-size: 75%;
+    line-height: 0;
 
-  position: relative;
+    position: relative;
 
-  vertical-align: baseline;
+    vertical-align: baseline;
 }
+
 sup {
-  top: -0.5em;
+    top: -.5em;
 }
+
 sub {
-  bottom: -0.25em;
+    bottom: -.25em;
 }
 
 table {
-  border-spacing: 0;
-  border-collapse: collapse;
+    border-spacing: 0;
+    border-collapse: collapse;
 }
 
 input,
 textarea,
 button {
-  font-family: inhert;
-  font-size: inherit;
+    font-family: inhert;
+    font-size: inherit;
 
-  color: inherit;
+    color: inherit;
 }
 
 select {
-  text-indent: 0.01px;
-  text-overflow: '';
+    text-indent: .01px;
+    text-overflow: '';
 
-  border: 0;
-  border-radius: 0;
+    border: 0;
+    border-radius: 0;
 
-  -webkit-appearance: none;
-  -moz-appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
 }
+
 select::-ms-expand {
-  display: none;
+    display: none;
 }
 
 code,
 pre {
-  font-family: monospace, monospace;
-  font-size: 1em;
+    font-family: monospace, monospace;
+    font-size: 1em;
 }

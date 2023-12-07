@@ -36,19 +36,19 @@ request.interceptors.response.use(
     const status = error.response.status
     switch (status) {
       case 401:
-        message = 'TOKEN过期'
+        message = '401 TOKEN Expired'
         break
       case 403:
-        message = '无权访问'
+        message = '403 Forbidden'
         break
       case 404:
-        message = '请求地址错误'
+        message = '404 Not Found'
         break
       case 500:
-        message = '服务器出现问题'
+        message = '500 Server Error'
         break
       default:
-        message = '网络出现问题'
+        message = 'Network Error'
         break
     }
     //提示错误信息

@@ -11,21 +11,21 @@
           icon="Plus"
           :disabled="categoryStore.c3Id ? false : true"
         >
-          添加属性
+          add Attr
         </el-button>
         <el-table border style="margin: 10px 0px" :data="attrArr">
           <el-table-column
-            label="序号"
+            label="Id"
             type="index"
             align="center"
             width="80px"
           ></el-table-column>
           <el-table-column
-            label="属性名称"
+            label="Attr Name"
             width="120px"
             prop="attrName"
           ></el-table-column>
-          <el-table-column label="属性值名称">
+          <el-table-column label="Attr Value Name">
             <template #="{ row, $index }">
               <el-tag
                 style="margin: 5px"
@@ -36,7 +36,7 @@
               </el-tag>
             </template>
           </el-table-column>
-          <el-table-column label="操作" width="120px">
+          <el-table-column label="Operation" width="120px">
             <!-- row：已有的属性对象 -->
             <template #="{ row, $index }">
               <!-- 修改已有属性的按钮 -->
@@ -47,7 +47,7 @@
                 @click="updateAttr(row)"
               ></el-button>
               <el-popconfirm
-                :title="`你确定删除${row.attrName}?`"
+                :title="`Delete ${row.attrName}?`"
                 width="200px"
                 @confirm="deleteAttr(row.id)"
               >
@@ -66,9 +66,9 @@
       <div v-show="scene == 1">
         <!-- 展示添加属性与修改数据的结构 -->
         <el-form :inline="true">
-          <el-form-item label="属性名称">
+          <el-form-item label="Attr Name">
             <el-input
-              placeholder="请你输入属性名称"
+              placeholder="Please input Attr Name"
               v-model="attrParams.attrName"
             ></el-input>
           </el-form-item>
@@ -80,10 +80,10 @@
           size="default"
           icon="Plus"
         >
-          添加属性值
+          Add Attr Value
         </el-button>
         <el-button type="primary" size="default" @click="cancel">
-          取消
+          Cancel
         </el-button>
         <el-table
           border
@@ -91,12 +91,12 @@
           :data="attrParams.attrValueList"
         >
           <el-table-column
-            label="序号"
+            label="Id"
             width="80px"
             type="index"
             align="center"
           ></el-table-column>
-          <el-table-column label="属性值名称">
+          <el-table-column label="Attr Value Name">
             <!-- row:即为当前属性值对象 -->
             <template #="{ row, $index }">
               <el-input
@@ -104,13 +104,13 @@
                 v-if="row.flag"
                 @blur="toLook(row, $index)"
                 size="small"
-                placeholder="请你输入属性值名称"
+                placeholder="Please input Attr Value Name"
                 v-model="row.valueName"
               ></el-input>
               <div v-else @click="toEdit(row, $index)">{{ row.valueName }}</div>
             </template>
           </el-table-column>
-          <el-table-column label="属性值操作">
+          <el-table-column label="Attr Value Name Operation">
             <template #="{ row, index }">
               <el-button
                 type="primary"
@@ -127,10 +127,10 @@
           @click="save"
           :disabled="attrParams.attrValueList.length > 0 ? false : true"
         >
-          保存
+          Save
         </el-button>
         <el-button type="primary" size="default" @click="cancel">
-          取消
+          Cancel
         </el-button>
       </div>
     </el-card>
@@ -232,14 +232,14 @@ const save = async () => {
     //提示信息
     ElMessage({
       type: 'success',
-      message: attrParams.id ? '修改成功' : '添加成功',
+      message: attrParams.id ? 'Refactor successfully' : 'Add successfully',
     })
     //获取全部已有的属性与属性值
     getAttr()
   } else {
     ElMessage({
       type: 'error',
-      message: attrParams.id ? '修改失败' : '添加失败',
+      message: attrParams.id ? 'Refactor failed' : 'Add failed',
     })
   }
 }
@@ -253,7 +253,7 @@ const toLook = (row: AttrValue, $index: number) => {
     //提示信息
     ElMessage({
       type: 'error',
-      message: '属性值不能为空',
+      message: 'Attr is not null',
     })
     return
   }
@@ -271,7 +271,7 @@ const toLook = (row: AttrValue, $index: number) => {
     //提示信息
     ElMessage({
       type: 'error',
-      message: '属性值不能重复',
+      message: 'Attr cannot be duplicated',
     })
     return
   }
@@ -297,14 +297,14 @@ const deleteAttr = async (attrId: number) => {
   if (result.code == 200) {
     ElMessage({
       type: 'success',
-      message: '删除成功',
+      message: 'Delete Success',
     })
     //获取一次已有的属性与属性值
     getAttr()
   } else {
     ElMessage({
       type: 'error',
-      message: '删除失败',
+      message: 'Delete Failed',
     })
   }
 }

@@ -10,8 +10,8 @@
           :rules="rules"
           ref="loginForms"
         >
-          <h1>Hello</h1>
-          <h2>欢迎来到硅谷甄选</h2>
+          <h1>Welcome</h1>
+          <h2>Uranus Management</h2>
           <el-form-item prop="username">
             <el-input
               :prefix-icon="User"
@@ -34,7 +34,7 @@
               size="default"
               @click="login"
             >
-              登录
+              Login
             </el-button>
           </el-form-item>
         </el-form>
@@ -83,8 +83,8 @@ const login = async () => {
     //登录成功提示信息
     ElNotification({
       type: 'success',
-      message: '欢迎回来',
-      title: `HI,${getTime()}好`,
+      message: 'Welcome back',
+      title: `HI ${useStore.username}, Good ${getTime()}`,
     })
     //登录成功加载效果也消失
     loading.value = false
@@ -107,7 +107,7 @@ const validatorUserName = (rule: any, value: any, callback: any) => {
   if (value.length >= 5) {
     callback()
   } else {
-    callback(new Error('账号长度至少五位'))
+    callback(new Error('Length must be at least 5'))
   }
 }
 
@@ -115,7 +115,7 @@ const validatorPassword = (rule: any, value: any, callback: any) => {
   if (value.length >= 6) {
     callback()
   } else {
-    callback(new Error('密码长度至少六位'))
+    callback(new Error('Length must be at least 6'))
   }
 }
 

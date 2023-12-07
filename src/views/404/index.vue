@@ -1,7 +1,7 @@
 <template>
   <div class="box">
     <img src="../../assets/images/error_images/404.png" alt="" />
-    <button @click="goHome">首页</button>
+    <button @click="goHome">Home</button>
   </div>
 </template>
 
@@ -25,8 +25,8 @@ const goHome = () => {
     height: 400px;
   }
   button {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 40px;
   }
 }
 </style>

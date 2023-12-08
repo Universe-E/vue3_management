@@ -2,24 +2,24 @@
   <el-card>
     <el-table border style="margin: 10px 0px" :data="skuArr">
       <el-table-column
-        label="序号"
+        label="Id"
         type="index"
         align="center"
         width="80px"
       ></el-table-column>
       <el-table-column
-        label="名称"
+        label="Name"
         show-overflow-tooltip
         width="150px"
         prop="skuName"
       ></el-table-column>
       <el-table-column
-        label="描述"
+        label="Description"
         show-overflow-tooltip
         width="150px"
         prop="skuDesc"
       ></el-table-column>
-      <el-table-column label="图片" width="150px">
+      <el-table-column label="Image" width="150px">
         <template #="{ row, $index }">
           <img
             :src="row.skuDefaultImg"
@@ -29,16 +29,16 @@
         </template>
       </el-table-column>
       <el-table-column
-        label="重量"
+        label="Weight"
         width="150px"
         prop="weight"
       ></el-table-column>
       <el-table-column
-        label="价格"
+        label="Price"
         width="150px"
         prop="price"
       ></el-table-column>
-      <el-table-column label="操作" width="250px" fixed="right">
+      <el-table-column label="Operation" width="250px" fixed="right">
         <template #="{ row, $index }">
           <el-button
             type="primary"
@@ -59,7 +59,7 @@
             @click="findSku(row)"
           ></el-button>
           <el-popconfirm
-            :title="`你确定要删除${row.skuName}?`"
+            :title="`Delete ${row.skuName}?`"
             width="200px"
             @confirm="removeSku(row.id)"
           >
@@ -84,23 +84,23 @@
     <el-drawer v-model="drawer">
       <!-- 标题部分 -->
       <template #header>
-        <h4>查看商品的详情</h4>
+        <h4>Details</h4>
       </template>
       <template #default>
         <el-row style="margin: 10px 0px">
-          <el-col :span="6">名称</el-col>
+          <el-col :span="6">Name</el-col>
           <el-col :span="18">{{ skuInfo.skuName }}</el-col>
         </el-row>
         <el-row style="margin: 10px 0px">
-          <el-col :span="6">描述</el-col>
+          <el-col :span="6">Description</el-col>
           <el-col :span="18">{{ skuInfo.skuDesc }}</el-col>
         </el-row>
         <el-row style="margin: 10px 0px">
-          <el-col :span="6">价格</el-col>
+          <el-col :span="6">Price</el-col>
           <el-col :span="18">{{ skuInfo.price }}</el-col>
         </el-row>
         <el-row style="margin: 10px 0px">
-          <el-col :span="6">平台属性</el-col>
+          <el-col :span="6">Tags</el-col>
           <el-col :span="18">
             <el-tag
               style="margin: 5px"
@@ -112,7 +112,7 @@
           </el-col>
         </el-row>
         <el-row style="margin: 10px 0px">
-          <el-col :span="6">销售属性</el-col>
+          <el-col :span="6">Characters</el-col>
           <el-col :span="18">
             <el-tag
               style="margin: 5px"
@@ -124,7 +124,7 @@
           </el-col>
         </el-row>
         <el-row style="margin: 10px 0px">
-          <el-col :span="6">商品图片</el-col>
+          <el-col :span="6">Images</el-col>
           <el-col :span="18">
             <el-carousel :interval="4000" type="card" height="200px">
               <el-carousel-item
@@ -197,21 +197,21 @@ const updateSale = async (row: SkuData) => {
     //下架操作
     await reqCancelSale(row.id as number)
     //提示信息
-    ElMessage({ type: 'success', message: '下架成功' })
+    ElMessage({ type: 'success', message: 'Withdraw successfully' })
     //发请求获取当前更新完毕的全部已有的SKU
     getHasSku(pageNo.value)
   } else {
     //下架操作
     await reqSaleSku(row.id as number)
     //提示信息
-    ElMessage({ type: 'success', message: '上架成功' })
+    ElMessage({ type: 'success', message: 'Launch successfully' })
     //发请求获取当前更新完毕的全部已有的SKU
     getHasSku(pageNo.value)
   }
 }
 //更新已有的SKU
 const updateSku = () => {
-  ElMessage({ type: 'success', message: '程序员在努力的更新中....' })
+  ElMessage({ type: 'success', message: 'Updating...' })
 }
 //查看商品详情按钮的回调
 const findSku = async (row: SkuData) => {
@@ -228,12 +228,12 @@ const removeSku = async (id: number) => {
   let result: any = await reqRemoveSku(id)
   if (result.code == 200) {
     //提示信息
-    ElMessage({ type: 'success', message: '删除成功' })
+    ElMessage({ type: 'success', message: 'Delete successfully' })
     //获取已有全部商品
     getHasSku(skuArr.value.length > 1 ? pageNo.value : pageNo.value - 1)
   } else {
     //删除失败
-    ElMessage({ type: 'error', message: '系统数据不能删除' })
+    ElMessage({ type: 'error', message: 'Cannot delete root data' })
   }
 }
 </script>

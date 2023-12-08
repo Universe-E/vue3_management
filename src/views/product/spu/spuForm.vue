@@ -1,12 +1,12 @@
 <template>
   <el-form label-width="100px">
-    <el-form-item label="SPU名称">
+    <el-form-item label="SPU Name">
       <el-input
-        placeholder="请你输入SPU名称"
+        placeholder="Please input SPU name"
         v-model="SpuParams.spuName"
       ></el-input>
     </el-form-item>
-    <el-form-item label="SPU品牌">
+    <el-form-item label="Brand">
       <el-select v-model="SpuParams.tmId">
         <el-option
           v-for="(item, index) in AllTradeMark"
@@ -16,14 +16,14 @@
         ></el-option>
       </el-select>
     </el-form-item>
-    <el-form-item label="SPU描述">
+    <el-form-item label="SPU Description">
       <el-input
         type="textarea"
-        placeholder="请你输入SPU描述"
+        placeholder="Please input SPU description"
         v-model="SpuParams.description"
       ></el-input>
     </el-form-item>
-    <el-form-item label="SPU图片">
+    <el-form-item label="SPU Image">
       <!-- v-model:fileList->展示默认图片 
                  action:上传图片的接口地址
                  list-type:文件列表的类型
@@ -55,8 +55,8 @@
         v-model="saleAttrIdAndValueName"
         :placeholder="
           unSelectSaleAttr.length
-            ? `还未选择${unSelectSaleAttr.length}个`
-            : '无'
+            ? `${unSelectSaleAttr.length} not selected`
+            : 'None'
         "
       >
         <el-option
@@ -74,22 +74,22 @@
         size="default"
         icon="Plus"
       >
-        添加属性
+        Add properties
       </el-button>
       <!-- table展示销售属性与属性值的地方 -->
       <el-table border style="margin: 10px 0px" :data="saleAttr">
         <el-table-column
-          label="序号"
+          label="Id"
           type="index"
           align="center"
           width="80px"
         ></el-table-column>
         <el-table-column
-          label="销售属性名字"
+          label="Attr Name"
           width="120px"
           prop="saleAttrName"
         ></el-table-column>
-        <el-table-column label="销售属性值">
+        <el-table-column label="Attr Value">
           <!-- row:即为当前SPU已有的销售属性对象 -->
           <template #="{ row, $index }">
             <el-tag
@@ -106,7 +106,7 @@
               @blur="toLook(row)"
               v-model="row.saleAttrValue"
               v-if="row.flag == true"
-              placeholder="请你输入属性值"
+              placeholder="Please input Attr value"
               size="small"
               style="width: 100px"
             ></el-input>
@@ -119,7 +119,7 @@
             ></el-button>
           </template>
         </el-table-column>
-        <el-table-column label="操作" width="120px">
+        <el-table-column label="Operation" width="120px">
           <template #="{ row, $index }">
             <el-button
               type="primary"
@@ -138,9 +138,11 @@
         size="default"
         @click="save"
       >
-        保存
+        Save
       </el-button>
-      <el-button type="primary" size="default" @click="cancel">取消</el-button>
+      <el-button type="primary" size="default" @click="cancel">
+        Cancel
+      </el-button>
     </el-form-item>
   </el-form>
 </template>
@@ -244,14 +246,14 @@ const handlerUpload = (file: any) => {
     } else {
       ElMessage({
         type: 'error',
-        message: '上传文件务必小于3M',
+        message: 'Size must be <= 3M',
       })
       return false
     }
   } else {
     ElMessage({
       type: 'error',
-      message: '上传文件务必PNG|JPG|GIF',
+      message: 'Upload PNG|JPG|GIF',
     })
     return false
   }
@@ -309,7 +311,7 @@ const toLook = (row: SaleAttr) => {
   if ((saleAttrValue as string).trim() == '') {
     ElMessage({
       type: 'error',
-      message: '属性值不能为空的',
+      message: 'Attr cannot be null',
     })
     return
   }
@@ -321,7 +323,7 @@ const toLook = (row: SaleAttr) => {
   if (repeat) {
     ElMessage({
       type: 'error',
-      message: '属性值重复',
+      message: 'Duplicate Attrs',
     })
     return
   }
@@ -351,7 +353,7 @@ const save = async () => {
   if (result.code == 200) {
     ElMessage({
       type: 'success',
-      message: SpuParams.value.id ? '更新成功' : '添加成功',
+      message: SpuParams.value.id ? 'Update Successfully' : 'Add Successfully',
     })
     //通知父组件切换场景为0
     $emit('changeScene', {
@@ -361,7 +363,7 @@ const save = async () => {
   } else {
     ElMessage({
       type: 'success',
-      message: SpuParams.value.id ? '更新成功' : '添加成功',
+      message: SpuParams.value.id ? 'Update Successfully' : 'Add Successfully',
     })
   }
 }

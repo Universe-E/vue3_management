@@ -17,43 +17,43 @@
         <!-- 展示已有SPU数据 -->
         <el-table style="margin: 10px 0px" border :data="records">
           <el-table-column
-            label="序号"
+            label="Id"
             type="index"
             align="center"
             width="80px"
           ></el-table-column>
-          <el-table-column label="SPU名称" prop="spuName"></el-table-column>
+          <el-table-column label="SPU Name" prop="spuName"></el-table-column>
           <el-table-column
-            label="SPU描述"
+            label="SPU Description"
             prop="description"
             show-overflow-tooltip
           ></el-table-column>
-          <el-table-column label="SPU操作">
+          <el-table-column label="SPU Operation">
             <!-- row:即为已有的SPU对象 -->
             <template #="{ row, $index }">
               <el-button
                 type="primary"
                 size="small"
                 icon="Plus"
-                title="添加SKU"
+                title="Add SKU"
                 @click="addSku(row)"
               ></el-button>
               <el-button
                 type="primary"
                 size="small"
                 icon="Edit"
-                title="修改SPU"
+                title="Modify SPU"
                 @click="updateSpu(row)"
               ></el-button>
               <el-button
                 type="primary"
                 size="small"
                 icon="View"
-                title="查看SKU列表"
+                title="SKU List"
                 @click="findSku(row)"
               ></el-button>
               <el-popconfirm
-                :title="`你确定删除${row.spuName}?`"
+                :title="`Delete ${row.spuName}?`"
                 width="200px"
                 @confirm="deleteSpu(row)"
               >
@@ -62,7 +62,7 @@
                     type="primary"
                     size="small"
                     icon="Delete"
-                    title="删除SPU"
+                    title="Delete SPU"
                   ></el-button>
                 </template>
               </el-popconfirm>
@@ -94,12 +94,12 @@
         @changeScene="changeScene"
       ></SkuForm>
       <!-- dialog对话框:展示已有的SKU数据 -->
-      <el-dialog v-model="show" title="SKU列表">
+      <el-dialog v-model="show" title="SKU List">
         <el-table border :data="skuArr">
-          <el-table-column label="SKU名字" prop="skuName"></el-table-column>
-          <el-table-column label="SKU价格" prop="price"></el-table-column>
-          <el-table-column label="SKU重量" prop="weight"></el-table-column>
-          <el-table-column label="SKU图片">
+          <el-table-column label="SKU Name" prop="skuName"></el-table-column>
+          <el-table-column label="SKU Price" prop="price"></el-table-column>
+          <el-table-column label="SKU Weight" prop="weight"></el-table-column>
+          <el-table-column label="SKU Image">
             <template #="{ row, $index }">
               <img
                 :src="row.skuDefaultImg"
@@ -229,14 +229,14 @@ const deleteSpu = async (row: SpuData) => {
   if (result.code == 200) {
     ElMessage({
       type: 'success',
-      message: '删除成功',
+      message: 'Delete successfully',
     })
     //获取剩余SPU数据
     getHasSpu(records.value.length > 1 ? pageNo.value : pageNo.value - 1)
   } else {
     ElMessage({
       type: 'error',
-      message: '删除失败',
+      message: 'Delete failed',
     })
   }
 }

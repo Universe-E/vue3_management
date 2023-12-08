@@ -1,30 +1,30 @@
 <template>
   <el-form label-width="100px">
-    <el-form-item label="SKU名称">
-      <el-input placeholder="SKU名称" v-model="skuParams.skuName"></el-input>
+    <el-form-item label="SKU Name">
+      <el-input placeholder="SKU Name" v-model="skuParams.skuName"></el-input>
     </el-form-item>
-    <el-form-item label="价格(元)">
+    <el-form-item label="Price(Yuan)">
       <el-input
-        placeholder="价格(元)"
+        placeholder="Price(Yuan)"
         type="number"
         v-model="skuParams.price"
       ></el-input>
     </el-form-item>
-    <el-form-item label="重量(g)">
+    <el-form-item label="Weight(g)">
       <el-input
-        placeholder="重量(g)"
+        placeholder="Weight(g)"
         type="number"
         v-model="skuParams.weight"
       ></el-input>
     </el-form-item>
-    <el-form-item label="SKU描述">
+    <el-form-item label="SKU Description">
       <el-input
-        placeholder="SKU描述"
+        placeholder="SKU Description"
         type="textarea"
         v-model="skuParams.skuDesc"
       ></el-input>
     </el-form-item>
-    <el-form-item label="平台属性">
+    <el-form-item label="Properties">
       <el-form :inline="true">
         <el-form-item
           v-for="(item, index) in attrArr"
@@ -42,7 +42,7 @@
         </el-form-item>
       </el-form>
     </el-form-item>
-    <el-form-item label="销售属性">
+    <el-form-item label="Sale Properties">
       <el-form :inline="true">
         <el-form-item
           :label="item.saleAttrName"
@@ -60,31 +60,33 @@
         </el-form-item>
       </el-form>
     </el-form-item>
-    <el-form-item label="图片名称">
+    <el-form-item label="Image Name">
       <el-table border :data="imgArr" ref="table">
         <el-table-column
           type="selection"
           width="80px"
           align="center"
         ></el-table-column>
-        <el-table-column label="图片">
+        <el-table-column label="Image">
           <template #="{ row, $index }">
             <img :src="row.imgUrl" alt="" style="width: 100px; height: 100px" />
           </template>
         </el-table-column>
-        <el-table-column label="名称" prop="imgName"></el-table-column>
-        <el-table-column label="操作">
+        <el-table-column label="Name" prop="imgName"></el-table-column>
+        <el-table-column label="Operation">
           <template #="{ row, $index }">
             <el-button type="primary" size="small" @click="handler(row)">
-              设置默认
+              Default settings
             </el-button>
           </template>
         </el-table-column>
       </el-table>
     </el-form-item>
     <el-form-item>
-      <el-button type="primary" size="default" @click="save">保存</el-button>
-      <el-button type="primary" size="default" @click="cancel">取消</el-button>
+      <el-button type="primary" size="default" @click="save">Save</el-button>
+      <el-button type="primary" size="default" @click="cancel">
+        Cancel
+      </el-button>
     </el-form-item>
   </el-form>
 </template>
@@ -205,14 +207,14 @@ const save = async () => {
   if (result.code == 200) {
     ElMessage({
       type: 'success',
-      message: '添加SKU成功',
+      message: 'Add SKU Successfully',
     })
     //通知父组件切换场景为零
     $emit('changeScene', { flag: 0, params: '' })
   } else {
     ElMessage({
       type: 'error',
-      message: '添加SKU失败',
+      message: 'Add SKU failed',
     })
   }
 }

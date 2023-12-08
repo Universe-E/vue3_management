@@ -9,7 +9,7 @@
         @click="addTrademark"
         v-has="`btn.Trademark.add`"
       >
-        添加品牌
+        Add Brand
       </el-button>
       <!-- 表格组件：用于展示已有得平台数据 -->
       <!-- table:---border:可以设置表格纵向是否有边框
@@ -17,19 +17,19 @@
             -->
       <el-table style="margin: 10px 0px" border :data="trademarkArr">
         <el-table-column
-          label="序号"
+          label="Id"
           width="80px"
           align="center"
           type="index"
         ></el-table-column>
         <!-- table-column:默认展示数据用div -->
-        <el-table-column label="品牌名称" prop="tmName"></el-table-column>
-        <el-table-column label="品牌LOGO">
+        <el-table-column label="Brand Name" prop="tmName"></el-table-column>
+        <el-table-column label="Brand LOGO">
           <template #="{ row, $index }">
             <img :src="row.logoUrl" style="width: 100px; height: 100px" />
           </template>
         </el-table-column>
-        <el-table-column label="品牌操作">
+        <el-table-column label="Brand Operation">
           <template #="{ row, $index }">
             <el-button
               type="primary"
@@ -38,7 +38,7 @@
               @click="updateTrademark(row)"
             ></el-button>
             <el-popconfirm
-              :title="`您确定要删除${row.tmName}?`"
+              :title="`Delete ${row.tmName}?`"
               width="250px"
               icon="Delete"
               @confirm="removeTradeMark(row.id)"
@@ -81,7 +81,7 @@
         -->
     <el-dialog
       v-model="dialogFormVisible"
-      :title="trademarkParams.id ? '修改品牌' : '添加品牌'"
+      :title="trademarkParams.id ? 'Modify' : 'Add'"
     >
       <el-form
         style="width: 80%"
@@ -89,13 +89,13 @@
         :rules="rules"
         ref="formRef"
       >
-        <el-form-item label="品牌名称" label-width="100px" prop="tmName">
+        <el-form-item label="Brand Name" label-width="100px" prop="tmName">
           <el-input
-            placeholder="请您输入品牌名称"
+            placeholder="Please input brand name"
             v-model="trademarkParams.tmName"
           ></el-input>
         </el-form-item>
-        <el-form-item label="品牌LOGO" label-width="100px" prop="logoUrl">
+        <el-form-item label="Brand LOGO" label-width="100px" prop="logoUrl">
           <!-- upload组件属性:action图片上传路径书写/api,代理服务器不发送这次post请求  -->
           <el-upload
             class="avatar-uploader"
@@ -118,10 +118,10 @@
       <!-- 具名插槽:footer -->
       <template #footer>
         <el-button type="primary" size="default" @click="cancel">
-          取消
+          Cancel
         </el-button>
         <el-button type="primary" size="default" @click="confirm">
-          确定
+          Confirm
         </el-button>
       </template>
     </el-dialog>
@@ -237,7 +237,7 @@ const confirm = async () => {
     //弹出提示信息
     ElMessage({
       type: 'success',
-      message: trademarkParams.id ? '修改品牌成功' : '添加品牌成功',
+      message: trademarkParams.id ? 'Modify Successfully' : 'Add Successfully',
     })
     //再次发请求获取已有全部的品牌数据
     getHasTrademark(trademarkParams.id ? pageNo.value : 1)
@@ -245,7 +245,7 @@ const confirm = async () => {
     //添加品牌失败
     ElMessage({
       type: 'error',
-      message: trademarkParams.id ? '修改品牌失败' : '添加品牌失败',
+      message: trademarkParams.id ? 'Modify failed' : 'Add failed',
     })
     //关闭对话框
     dialogFormVisible.value = false
@@ -265,14 +265,14 @@ const beforeAvatarUpload: UploadProps['beforeUpload'] = (rawFile) => {
     } else {
       ElMessage({
         type: 'error',
-        message: '上传文件大小小于4M',
+        message: 'Size must be <= 4M',
       })
       return false
     }
   } else {
     ElMessage({
       type: 'error',
-      message: '上传文件格式务必PNG|JPG|GIF',
+      message: 'Upload PNG|JPG|GIF',
     })
     return false
   }
@@ -297,7 +297,7 @@ const validatorTmName = (rule: any, value: any, callBack: any) => {
     callBack()
   } else {
     //校验未通过返回的错误的提示信息
-    callBack(new Error('品牌名称位数大于等于两位'))
+    callBack(new Error('Name length must be >= 2'))
   }
 }
 //品牌LOGO图片的自定义校验规则方法
@@ -306,7 +306,7 @@ const validatorLogoUrl = (rule: any, value: any, callBack: any) => {
   if (value) {
     callBack()
   } else {
-    callBack(new Error('LOGO图片务必上传'))
+    callBack(new Error('Must upload LOGO Images'))
   }
 }
 
@@ -327,7 +327,7 @@ const removeTradeMark = async (id: number) => {
     //删除成功提示信息
     ElMessage({
       type: 'success',
-      message: '删除品牌成功',
+      message: 'Delete successfully',
     })
     //再次获取已有的品牌数据
     getHasTrademark(
@@ -336,7 +336,7 @@ const removeTradeMark = async (id: number) => {
   } else {
     ElMessage({
       type: 'error',
-      message: '删除品牌失败',
+      message: 'Delete failed',
     })
   }
 }

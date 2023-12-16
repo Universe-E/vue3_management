@@ -5,7 +5,7 @@ import { reqLogin, reqUserInfo, reqLogout } from '@/api/user'
 import type {
   loginFormData,
   loginResponseData,
-  userInfoReponseData,
+  userInfoResponseData,
 } from '@/api/user/type'
 import type { UserState } from './types/type'
 //引入操作本地存储的工具方法
@@ -66,7 +66,7 @@ const useUserStore = defineStore('User', {
     //获取用户信息方法
     async userInfo() {
       //获取用户信息进行存储仓库当中[用户头像、名字]
-      const result: userInfoReponseData = await reqUserInfo()
+      const result: userInfoResponseData = await reqUserInfo()
       console.log(result)
       //如果获取用户信息成功，存储一下用户信息
       if (result.code == 200) {

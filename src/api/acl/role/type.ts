@@ -3,7 +3,7 @@ export interface ResponseData {
   message: string
   ok: boolean
 }
-//职位数据类型
+//ts type
 export interface RoleData {
   id?: number
   createTime?: string
@@ -12,9 +12,8 @@ export interface RoleData {
   remark?: null
 }
 
-//全部职位的数组的ts类型
 export type Records = RoleData[]
-//全部职位数据的相应的ts类型
+//ts type of all roles
 export interface RoleResponseData extends ResponseData {
   data: {
     records: Records
@@ -31,8 +30,8 @@ export interface RoleResponseData extends ResponseData {
   }
 }
 
-//菜单与按钮数据的ts类型
-export interface MunuData {
+//ts type of menu and button
+export interface MenuData {
   id: number
   createTime: string
   updateTime: string
@@ -46,9 +45,9 @@ export interface MunuData {
   children?: MenuList
   select: boolean
 }
-export type MenuList = MunuData[]
+export type MenuList = MenuData[]
 
-//菜单权限与按钮权限数据的ts类型
+//ts type of permission
 export interface MenuResponseData extends ResponseData {
   data: MenuList
 }

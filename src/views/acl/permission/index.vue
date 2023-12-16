@@ -85,13 +85,13 @@ import {
 //引入ts类型
 import type {
   MenuParams,
-  PermisstionResponseData,
-  PermisstionList,
-  Permisstion,
+  PermissionResponseData,
+  PermissionList,
+  Permission,
 } from '@/api/acl/menu/type'
 import { ElMessage } from 'element-plus'
 //存储菜单的数据
-let PermisstionArr = ref<PermisstionList>([])
+let PermisstionArr = ref<PermissionList>([])
 //控制对话框的显示与隐藏
 let dialogVisible = ref<boolean>(false)
 //携带的参数
@@ -107,14 +107,14 @@ onMounted(() => {
 })
 //获取菜单数据的方法
 const getHasPermisstion = async () => {
-  let result: PermisstionResponseData = await reqAllPermisstion()
+  let result: PermissionResponseData = await reqAllPermisstion()
   if (result.code == 200) {
     PermisstionArr.value = result.data
   }
 }
 
 //添加菜单按钮的回调
-const addPermisstion = (row: Permisstion) => {
+const addPermisstion = (row: Permission) => {
   //清空数据
   Object.assign(menuData, {
     id: 0,
@@ -131,7 +131,7 @@ const addPermisstion = (row: Permisstion) => {
   menuData.pid = row.id as number
 }
 //编辑已有的菜单
-const updatePermisstion = (row: Permisstion) => {
+const updatePermisstion = (row: Permission) => {
   dialogVisible.value = true
   //点击修改按钮:收集已有的菜单的数据进行更新
   Object.assign(menuData, row)

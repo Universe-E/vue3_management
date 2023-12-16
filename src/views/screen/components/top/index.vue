@@ -1,14 +1,14 @@
 <template>
   <div class="top">
     <div class="left">
-      <span class="lbtn" @click="goHome">首页</span>
+      <span class="lbtn" @click="goHome">Home</span>
     </div>
     <div class="center">
-      <div class="title">智慧旅游可视化大数据平台</div>
+      <div class="title">Tourism Visualization Platform</div>
     </div>
     <div class="right">
-      <span class="rbtn">统计报告</span>
-      <span class="time">当前时间:{{ time }}</span>
+      <span class="rbtn">Statistics</span>
+      <span class="time">Time: {{ time }}</span>
     </div>
   </div>
 </template>
@@ -23,7 +23,7 @@ import { ref, onMounted, onBeforeUnmount } from 'vue'
 let $router = useRouter()
 
 //存储当前时间
-let time = ref(moment().format('YYYY年MM月DD日 hh:mm:ss'))
+let time = ref(moment().format('YYYY-MM-DD HH:mm:ss'))
 let timer = ref(0)
 //按钮的点击回调
 const goHome = () => {
@@ -32,7 +32,7 @@ const goHome = () => {
 //组件挂载完毕更新当前的事件
 onMounted(() => {
   timer.value = setInterval(() => {
-    time.value = moment().format('YYYY年MM月DD日 hh:mm:ss')
+    time.value = moment().format('YYYY-MM-DD HH:mm:ss')
   }, 1000)
 })
 
